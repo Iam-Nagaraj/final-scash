@@ -21,7 +21,6 @@
     		<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
     		<sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
     		<sonar.language>java</sonar.language>
-		
 	</properties>
 
 	<dependencies>
@@ -72,10 +71,10 @@
 		</dependency>
 
 		<dependency>
-    <groupId>org.jacoco</groupId> 
-    <artifactId>jacoco-maven-plugin</artifactId>
-    <version>0.8.7</version>
-</dependency>
+            <groupId>org.jacoco</groupId> 
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>0.8.7</version>
+        </dependency>
 	</dependencies>
 
 	<build>
@@ -94,30 +93,42 @@
 			</plugin>
 
 			<plugin>
-    <groupId>org.jacoco</groupId>
-    <artifactId>jacoco-maven-plugin</artifactId>
-    <version>${jacoco.version}</version>
-    <executions>
-        <execution>
-            <id>jacoco-initialize</id>
-            <goals>
-                <goal>prepare-agent</goal>
-            </goals>
-        </execution>
-        <execution>
-            <id>jacoco-site</id>
-            <phase>package</phase>
-            <goals>
-                <goal>report</goal>
-            </goals>
-        </execution>
-    </executions>
-</plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco.version}</version>
+                <executions>
+                    <execution>
+                        <id>jacoco-initialize</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>jacoco-site</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.owasp</groupId>
+                <artifactId>dependency-check-maven</artifactId>
+                <version>7.1.0</version> <!-- Use the latest version -->
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 		</plugins>
 	</build>
 
-
-	 <distributionManagement>
+	<distributionManagement>
         <repository>
             <id>maven-releases</id>
             <url>http://192.168.126.159:8060/repository/maven-releases/</url>
@@ -127,57 +138,4 @@
             <url>http://192.168.126.159:8060/repository/maven-snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
-
-  <build>
-    <plugins>
-        <plugin>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-maven-plugin</artifactId>
-            <configuration>
-                <excludes>
-                    <exclude>
-                        <groupId>org.projectlombok</groupId>
-                        <artifactId>lombok</artifactId>
-                    </exclude>
-                </excludes>
-            </configuration>
-        </plugin>
-
-        <plugin>
-            <groupId>org.jacoco</groupId>
-            <artifactId>jacoco-maven-plugin</artifactId>
-            <version>${jacoco.version}</version>
-            <executions>
-                <execution>
-                    <id>jacoco-initialize</id>
-                    <goals>
-                        <goal>prepare-agent</goal>
-                    </goals>
-                </execution>
-                <execution>
-                    <id>jacoco-site</id>
-                    <phase>package</phase>
-                    <goals>
-                        <goal>report</goal>
-                    </goals>
-                </execution>
-            </executions>
-        </plugin>
-
-        <plugin>
-            <groupId>org.owasp</groupId>
-            <artifactId>dependency-check-maven</artifactId>
-            <version>7.1.0</version> <!-- Use the latest version -->
-            <executions>
-                <execution>
-                    <goals>
-                        <goal>check</goal>
-                    </goals>
-                </execution>
-            </executions>
-        </plugin>
-    </plugins>
-</build>
-
-
 </project>
